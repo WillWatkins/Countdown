@@ -12,7 +12,6 @@ public class Countdown {
 
         TimerTask task = new TimerTask() {
             int seconds = Integer.parseInt(args[0]);
-            Time time = new Time(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
             @Override
             public void run() {
                 if (seconds > 1) {

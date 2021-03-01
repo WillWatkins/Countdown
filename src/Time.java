@@ -10,10 +10,13 @@ public class Time {
      * @param requiredMinutes minutes
      * @param requiredSeconds seconds
      */
-    public Time (int requiredHours, int requiredMinutes, int requiredSeconds){
+    public Time (int requiredHours, int requiredMinutes, int requiredSeconds) throws Exception{
+
         hours = requiredHours;
         minutes = requiredMinutes;
         seconds = requiredSeconds;
+
+        checkTimeIsLegal();
     }
 
     /**
@@ -21,7 +24,7 @@ public class Time {
      *
      * @return a new instance of Time.
      */
-    public Time subtractSecond(){
+    public Time subtractSecond() throws Exception{
         if (seconds >= 1) {
             seconds--;
         }
@@ -35,7 +38,12 @@ public class Time {
             minutes = 59;
             seconds = 59;
         }
-        return new Time(hours, minutes, seconds);
+        try {
+            return new Time(hours, minutes, seconds);
+        }
+        catch (Exception exception){
+            return null;
+        }
     }
 
     /**
@@ -63,4 +71,13 @@ public class Time {
     public String toString() {
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
+
+    public void checkTimeIsLegal() throws Exception{
+        if (minutes > 59)
+            throw new Exception("Minutes are only up to 59, otherwise add on an hour");
+        if (seconds > 59)
+            throw new Exception("Seconds are only up to 59, otherwise add on a minute");
+
+    }
+
 }
